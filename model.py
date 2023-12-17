@@ -63,3 +63,8 @@ model = Sequential([
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20)
+
+
+# Save the model to a file
+joblib.dump(model, 'detection_of_tumors_model.joblib')
+
