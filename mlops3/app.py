@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from prometheus_fastapi_instrumentator import Instrumentator
 from pydantic import BaseModel
 import joblib
 import numpy as np
@@ -9,6 +10,8 @@ app = FastAPI()
 
 # Load the saved model
 model = joblib.load('knn_model.joblib')
+
+Instrumentator().instrument(app).expose(app)
 
 # Define constants
 num_features = 5  # Update with the actual number of features in your dataset
