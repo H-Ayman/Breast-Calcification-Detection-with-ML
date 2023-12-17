@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Response
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 import joblib
@@ -17,9 +17,10 @@ Instrumentator().instrument(app).expose(app)
 
 # Create a counter metric to track HTTP requests
 http_requests_total = Counter('http_requests_total', 'Total number of HTTP requests')
+custom_counter = Counter('my_custom_counter', 'Description of my custom counter')
 
 # Define constants
-num_features = 5  
+num_features = 5  # Update with the actual number of features in your dataset
 
 class Item(BaseModel):
     features: list
@@ -39,9 +40,8 @@ async def predict(item: Item):
 def read_root():
     # Increment the counter on each request
     http_requests_total.inc()
-    return {"it's": "working"}
+    return {"it's working properly, check prometheus for data visualisation"}
 
-@app.get("/metrics", response_class=PlainTextResponse)
+@app.get("/metrics")
 def metrics():
-    # Return Prometheus-compatible metrics
-    return generate_latest(http_requests_total)
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
