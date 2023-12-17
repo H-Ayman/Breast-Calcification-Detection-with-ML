@@ -6,6 +6,7 @@ from tensorflow import keras
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python.keras.metrics import Precision, Recall
 
 # Define constants
 image_height, image_width = 240, 240  
@@ -57,6 +58,6 @@ model = Sequential([
     Dense(1, activation='sigmoid')  
 ])
 
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy', Precision(), Recall()])
 
-model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20)
+model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=12)
