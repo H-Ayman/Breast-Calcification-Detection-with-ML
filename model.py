@@ -2,6 +2,7 @@
 import os
 import numpy as np
 import tensorflow as tf
+import joblib
 from tensorflow import keras
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -13,9 +14,16 @@ image_height, image_width = 240, 240
 num_channels = 1  
 num_classes = 2  
 
+# Get the current script's directory
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
-positive_path = r"C:\Users\Ayman\Documents\GitHub\ML-ops\positive"
-negative_path = r"C:\Users\Ayman\Documents\GitHub\ML-ops\negative"
+# Construct relative paths
+positive_path = os.path.join(current_dir, 'positive')
+negative_path = os.path.join(current_dir, 'negative')
+
+positive_path = os.path.join(current_dir, 'positive')
+negative_path = os.path.join(current_dir, 'negative')
+
 
 
 # Preprocessing
@@ -60,4 +68,13 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy', Precision(), Recall()])
 
+<<<<<<< HEAD
 model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=12)
+=======
+model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20)
+
+
+# Save the model to a file
+joblib.dump(model, 'detection_of_tumors_model.joblib')
+
+>>>>>>> 0bb260f7dc862f97a262bb0d13648aa6dc8f4e2b
