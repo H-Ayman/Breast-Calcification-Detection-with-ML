@@ -12,9 +12,12 @@ image_height, image_width = 240, 240
 num_channels = 1  
 num_classes = 2  
 
+# Get the current script's directory
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
-positive_path = r"C:\Users\Ayman\Documents\GitHub\ML-ops\positive"
-negative_path = r"C:\Users\Ayman\Documents\GitHub\ML-ops\negative"
+# Construct relative paths
+positive_path = os.path.join(current_dir, 'positive')
+negative_path = os.path.join(current_dir, 'negative')
 
 
 # Preprocessing
