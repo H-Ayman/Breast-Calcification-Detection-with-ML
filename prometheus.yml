@@ -1,12 +1,20 @@
 # global config
 global:
   scrape_interval: 15s
-  evaluation_interval: 5s
+  evaluation_interval: 15s
 
-# Scrape configs with multiple scrape targets
 scrape_configs:
-  - job_name: 'my-fastapi-app'  
-    scrape_interval: 5s
+  - job_name: my-fastapi-app
+    honor_timestamps: true
+    track_timestamps_staleness: false
+    scrape_interval: 15s
+    scrape_timeout: 15s  
+    metrics_path: /metrics
+    scheme: http
+    follow_redirects: true
+    enable_http2: true
     static_configs:
-      - targets: ['my-fastapi-app:8000']  
+      - targets:
+        - myfastapi:8000
+
 
