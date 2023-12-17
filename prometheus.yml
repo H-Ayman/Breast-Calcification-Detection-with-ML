@@ -5,8 +5,8 @@ global:
 
 # Scrape configs with multiple scrape targets
 scrape_configs:
-  - job_name: 'my-fastapi-app'  # Change this to your FastAPI app name
+  - job_name: 'my-fastapi-app'  
     scrape_interval: 5s
     static_configs:
-      - targets: ['my-fastapi-app:8000']  # Change this to your FastAPI app container name and port
+      - targets: ['my-fastapi-app:8000']  
 
